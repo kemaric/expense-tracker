@@ -19,7 +19,7 @@ function ExpenseItem(props) {
                 <div className="expense-item__price">${amount}</div>
             </div>
         </Card>
-    )
+    );
 }
 
 export default ExpenseItem;

@@ -6,6 +6,7 @@ export function Expenses(props) {
     return (<Card className="expenses">
         {list.map(expense => (
             <ExpenseItem
+            key={expense.id}
             date={expense.date}
             amount={expense.amount}
             title={expense.title} />
