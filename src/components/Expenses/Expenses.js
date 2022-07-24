@@ -7,22 +7,18 @@ import { ExpenseFilter } from "../ExpenseFilter/ExpenseFilter";
 
 export function Expenses(props) {
     const { list } = props;
-    const [filteredList = [], setFilteredList] = useState(list);
-    const [selectedFilter, setFilter] = useState('');
-    // const [yearFilters, setYearFilters] = useState(null);
+    const [selectedFilter, setFilter] = useState('2020');
 
-    const onUpdateFilter = (e) => {
-        const newFilter = parseInt(e);
-        setFilter(e => { 
-            return newFilter; 
-        });
-        setFilteredList((previous = []) => {
-            return previous.filter(item => item.date.getFullYear() === newFilter)
-        });
+    const filteredList = list.filter(item => item.date.getFullYear().toString() === selectedFilter);
+    const yearOptions =  Array.from(new Set(list.map(expense => expense.date.getFullYear().toString())));
+    const onUpdateFilter = (year) => {
+        setFilter(year);
     }
     return (<Card className="expenses">
         <div>
-            <ExpenseFilter yearFilter={selectedFilter} onFilterChange={onUpdateFilter}/>
+            <ExpenseFilter yearFilter={selectedFilter} 
+            years={yearOptions}
+            onFilterChange={onUpdateFilter}/>
         </div>
         {filteredList.map(expense => (
             <ExpenseItem

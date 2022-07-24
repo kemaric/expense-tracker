@@ -7,7 +7,7 @@ export function ExpenseForm(props){
     const currentYear = new Date().getFullYear();
     const { 
         minDate = `${currentYear - 2}-01-01`, 
-        maxDate = `${currentYear}-01-01`,
+        maxDate = `${currentYear}-01-02`,
         onChange
     } = props;
     const DEFAULT_FORM = {

@@ -15,8 +15,9 @@ export const NewExpense = (prop) => {
         };
         addExpense(expenseData);
     }
+    const today = new Date();
     return (
         <div className="new-expense">
-            <ExpenseForm onChange={onNewExpense}/>
+            <ExpenseForm maxDate={`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`} onChange={onNewExpense}/>
         </div>);
 };
