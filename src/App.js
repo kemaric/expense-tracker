@@ -31,9 +31,10 @@ function App() {
     console.log("Adding expense", e);
     setExpenses((previous) => {return [...previous,e];});
   }
+  const showAddExpense = false;
   return (
     <div>
-      <NewExpense addExpense={onAddExpenseHandler}/>
+      <NewExpense  addExpense={onAddExpenseHandler}/>
       <Expenses list={expenses}/>
     </div>
   );

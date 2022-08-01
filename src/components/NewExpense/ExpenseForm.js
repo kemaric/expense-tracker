@@ -8,12 +8,12 @@ export function ExpenseForm(props){
     const { 
         minDate = `${currentYear - 2}-01-01`, 
         maxDate = `${currentYear}-01-02`,
-        onChange
+        onChange, onCancelEdit
     } = props;
     const DEFAULT_FORM = {
         title: "",
-        amount: "",
-        date: "",
+        amount: 0.0,
+        date: new Date(),
     }
     const [tmpExpense, setTmpExpense] = useState({
         ...DEFAULT_FORM,
@@ -35,7 +35,7 @@ export function ExpenseForm(props){
         console.log("Amount change", e?.target?.value);
         setTmpExpense((previousState) =>({
             ...previousState,
-            amount: e?.target?.value
+            amount: +(e?.target?.value)
         }));
         }
     const onDateChange = (e) => {
@@ -50,6 +50,10 @@ export function ExpenseForm(props){
         console.log("Saving expense", JSON.stringify(tmpExpense));
         setTmpExpense((previousState) => ({...DEFAULT_FORM}));
         onChange(tmpExpense);
+    }
+
+    const cancelEdit = () => {
+        onCancelEdit();
     }
 
     return (<form onSubmit={submitHandler}>
@@ -68,6 +72,7 @@ export function ExpenseForm(props){
             </div>
         </div>
         <div className="expense__actions">
+            <button className="expense__action" onClick={cancelEdit}>Cancel</button>
             <button className="expense__action" type="submit">Save Expense</button>
         </div>
     </form>);
