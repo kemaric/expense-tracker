@@ -15,8 +15,6 @@ export function Expenses(props) {
     const onUpdateFilter = (year) => {
         setFilter(year);
     }
-
-    // const noExpenses = (<div className="expenses">No expenses found</div>);
     
     return (<Card className="expenses">
         <div>

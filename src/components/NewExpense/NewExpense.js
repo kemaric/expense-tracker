@@ -1,12 +1,12 @@
 import React from "react";
-
+import { useState } from "react";
 import { ExpenseForm } from "./ExpenseForm";
 import "./NewExpense.css";
 
 export const NewExpense = (prop) => {
-    const { addExpense, showAddExpense } = prop;
+    const { addExpense } = prop;
+    const [isEditExpense, setIsEditExpense] = useState(false);
     const onNewExpense = (e) => {
-        console.log("Got new expense", e);
         const expenseData = {
             ...e,
             date: new Date(e.date),
@@ -17,12 +17,24 @@ export const NewExpense = (prop) => {
     }
     const today = new Date();
 
-    const toggleEdit = () => {
-        showAddExpense = !showAddExpense;
-    }
+    const toggleEdit = () => setIsEditExpense((prev) => !prev);
     
-    return (
+    const onCancelEdit = () => toggleEdit();
+
+    const newExpenseForm = (
         <div className="new-expense">
-            <ExpenseForm maxDate={`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`} onChange={onNewExpense}/>
-        </div>);
+            <ExpenseForm 
+                maxDate={`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`} 
+                onChange={onNewExpense}
+                onCancelEdit={onCancelEdit}/>
+        </div>
+    );
+    const defaultView = (
+        <div className="new-expense">
+            <button onClick={toggleEdit}>Create Expense</button>
+        </div>
+    );
+
+    return isEditExpense ? newExpenseForm : defaultView;
+    
 };
